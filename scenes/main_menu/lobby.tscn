@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cihc6h30fsmf6"]
+
+[ext_resource type="Script" path="res://scenes/main_menu/lobby.gd" id="1_kpt25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc6km"]
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+corner_detail = 1
+
+[node name="lobby" type="Panel"]
+offset_left = 151.085
+offset_top = 140.0
+offset_right = 383.085
+offset_bottom = 398.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fc6km")
+script = ExtResource("1_kpt25")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Lobby"
+horizontal_alignment = 1
+
+[node name="players_list" type="ItemList" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 116)
+layout_mode = 2
+max_text_lines = 3
+
+[node name="start_game_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 181.0
+offset_right = 161.0
+offset_bottom = 212.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "Start Game"
+
+[connection signal="pressed" from="start_game_button" to="." method="_on_start_game_button_pressed"]

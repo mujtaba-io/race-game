@@ -1,0 +1,147 @@
+[gd_scene load_steps=3 format=3 uid="uid://7gx11c5aiu1f"]
+
+[ext_resource type="Script" path="res://__tmp/main_menu.gd" id="1_mvvbg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiuoj"]
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+corner_detail = 1
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mvvbg")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 528.0
+offset_bottom = 519.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 174.0
+offset_right = 387.0
+offset_bottom = 349.0
+color = Color(0.286275, 0.172549, 0.172549, 0.607843)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 44.0
+offset_right = 481.0
+offset_bottom = 123.0
+color = Color(0.286275, 0.172549, 0.172549, 0.607843)
+
+[node name="Label" type="Label" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = -7.0
+offset_right = 147.0
+offset_bottom = 20.0
+scale = Vector2(3, 3)
+theme_override_font_sizes/font_size = 19
+text = "Tank Raider"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_right = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ip_input" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "LAN ip address"
+
+[node name="join_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Join Room"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "- INSTEAD -"
+horizontal_alignment = 1
+
+[node name="create_room_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Create Room"
+
+[node name="lobby" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 140.0
+offset_right = 379.0
+offset_bottom = 398.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tiuoj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="lobby"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="lobby/VBoxContainer"]
+layout_mode = 2
+text = "lobby; players"
+horizontal_alignment = 1
+
+[node name="players_list" type="ItemList" parent="lobby/VBoxContainer"]
+custom_minimum_size = Vector2(64, 116)
+layout_mode = 2
+max_text_lines = 3
+
+[node name="Label2" type="Label" parent="lobby/VBoxContainer"]
+layout_mode = 2
+text = "Join Team"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="lobby/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="join_red_button" type="Button" parent="lobby/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Join Red"
+
+[node name="join_blue_button" type="Button" parent="lobby/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.313726, 1, 1)
+text = "Join Blue"
+
+[node name="close_lobby_button" type="Button" parent="lobby"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = -2.0
+offset_right = 232.0
+offset_bottom = 29.0
+text = "x"
+flat = true
+
+[node name="start_game_button" type="Button" parent="lobby"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 211.0
+offset_right = 160.0
+offset_bottom = 242.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "Start Game"
+
+[connection signal="pressed" from="VBoxContainer/join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/create_room_button" to="." method="_on_create_room_button_pressed"]
+[connection signal="pressed" from="lobby/VBoxContainer/HBoxContainer/join_red_button" to="." method="_on_join_red_button_pressed"]
+[connection signal="pressed" from="lobby/VBoxContainer/HBoxContainer/join_blue_button" to="." method="_on_join_blue_button_pressed"]
+[connection signal="pressed" from="lobby/close_lobby_button" to="." method="_on_close_lobby_button_pressed"]
+[connection signal="pressed" from="lobby/start_game_button" to="." method="_on_start_game_button_pressed"]

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c00kswre3ybj5"
+path="res://.godot/imported/1385 Jeep.obj-291304792c2b59215d8967d5a9412501.mesh"
+
+[deps]
+
+files=["res://.godot/imported/1385 Jeep.obj-291304792c2b59215d8967d5a9412501.mesh"]
+
+source_file="res://_extern/cars/Jeep/1385 Jeep.obj"
+dest_files=["res://.godot/imported/1385 Jeep.obj-291304792c2b59215d8967d5a9412501.mesh", "res://.godot/imported/1385 Jeep.obj-291304792c2b59215d8967d5a9412501.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

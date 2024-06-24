@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://hmplt6w7rntf"]
+
+[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_evdi0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f5531"]
+font_color = Color(0.356863, 1, 0.356863, 1)
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_evdi0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 428.0
+offset_right = 761.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Server PIN (create or join)"
+
+[node name="name" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Your name"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Create/Join Room"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "enter pin+name to join server..."
+label_settings = SubResource("LabelSettings_f5531")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

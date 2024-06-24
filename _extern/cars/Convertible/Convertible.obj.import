@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://vknl2gcgahvr"
+path="res://.godot/imported/Convertible.obj-5106122bbe583371f4f8b9b3953b6604.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Convertible.obj-5106122bbe583371f4f8b9b3953b6604.mesh"]
+
+source_file="res://_extern/cars/Convertible/Convertible.obj"
+dest_files=["res://.godot/imported/Convertible.obj-5106122bbe583371f4f8b9b3953b6604.mesh", "res://.godot/imported/Convertible.obj-5106122bbe583371f4f8b9b3953b6604.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
