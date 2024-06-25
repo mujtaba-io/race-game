@@ -40,9 +40,22 @@ var room_state : Dictionary = {
 
 
 func push_player_state(player_name: String, new_state: Dictionary):
+	# update locally (unnecessary as it will be overrided by server changes)
+	# + we dont giv fuk to our state here, it is to send to server only
 	room_state['players'][player_name] = new_state
+	# then update server with new state
+	fetch('/room/'+room_pin, {
+		'player_name': player_name,
+		'player_state': new_state,
+	})
+	
 
 func pull_player_state(player_name: String):
+	# fetch player state from server
+	# NETWORK PLAYER MUST NEVER UPDATE ITS STATE TO SERVER
+	fetch('/room/'+room_pin, {})# MAKE GET REQUEST
+	# for now, send old state, but when response will arrive,
+	# next requests will return refreshed data
 	return room_state['players'][player_name]
 
 
@@ -56,13 +69,13 @@ func _ready():
 
 func join_room():
 	# api:- name:state for player to be put in rooms:players
-	fetch('/room/' + room_pin, {
+	fetch_unique('/join/' + room_pin, {
 		'player_name': our_player_name,
 	})
 
 
 func trigger_start_game():
-	fetch(
+	fetch_unique(
 		"/start/"+room_pin,
 		{"player_name": our_player_name} # who gave the command (must be admin)
 		)
@@ -96,7 +109,6 @@ func fetch(endpoint: String, data: Dictionary):
 		if error != OK:
 			push_error("An error occurred in the HTTP request.")
 
-
 # Called when the HTTP request is completed.
 func _http_request_completed(result, response_code, headers, body):
 	var json = JSON.new()
@@ -108,8 +120,47 @@ func _http_request_completed(result, response_code, headers, body):
 	# TODO: WRITE RESPNSE TO state to be able to work on it
 	
 	if response != null:
+		# TODO: MUST NOT UPDATE STATE OF CURRENT HUMAN PLAYER
 		room_state = response
 	
 	is_requesting = false
 
+
+
+
+
+
+# called when we have to call unrelated request from normal
+#series of state updating requests. - creates a separate
+# httprequest object for this.
+
+func fetch_unique(endpoint: String, data: Dictionary):
+	var http_request_unique: HTTPRequest = HTTPRequest.new()
+	add_child(http_request_unique)
+	http_request_unique.request_completed.connect(self._unique_http_request_completed)
+	var uri := domain + endpoint + '/'
+	print(uri)
+	# Perform a GET request. The URL below returns JSON as of writing.
+	if data.is_empty():
+		var error = http_request_unique.request(uri, ['Content-Type: application/json'])
+		if error != OK:
+			push_error("An error occurred in the HTTP request.")
+	else:
+		var body = JSON.new().stringify(data)
+		var error = http_request_unique.request(uri, ['Content-Type: application/json'], HTTPClient.METHOD_POST, body)
+		if error != OK:
+			push_error("An error occurred in the HTTP request.")
+
+# Called when the HTTP request is completed.
+func _unique_http_request_completed(result, response_code, headers, body):
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+
+	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
+	print(response)
+	# TODO: WRITE RESPNSE TO state to be able to work on it
+	
+	if response != null:
+		room_state = response
 

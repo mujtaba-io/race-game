@@ -30,11 +30,40 @@ rooms = {
 # API
 import traceback
 
-@app.route('/room/<path:pin>/', methods=['POST'])
-def update_player_state(pin=''):
+
+@app.route('/join/<path:pin>/', methods=['POST'])
+def join_room(pin=''):
     try:
         player_name: str = request.json['player_name'] # get player info from post request
-        player_state: dict = {}
+
+        if pin in rooms: # if room exists
+            if rooms[pin]['game']['state'] == 'in_game': # if in game
+                if player_name in rooms[pin]['players']: # if player already there
+                    return jsonify(rooms[pin]) # send new room state to him
+                else: # if player is new arrival
+                    return jsonify({'error': 'Race is racing, so wait...'})
+            else: # if not in game (means, if in lobby)
+                rooms[pin]['players'][player_name]= {} # join player to room
+                return jsonify(rooms[pin]) # send new room state to him
+        else:
+            create_room(pin, player_name)
+            return jsonify(rooms[pin]) # send new room state to him
+    except:
+        traceback.print_exc()
+
+
+# TODO: UPDATE THIS FUNCTION AS JOINING IS NOW HANDLED BY join_room()
+# updates player state and returns the updated room state
+@app.route('/room/<path:pin>/', methods=['GET', 'POST'])
+def update_player_state(pin=''):
+    try:
+        # if it is network plaayer requesting new game state, give him
+        if request.method == 'GET':
+            return jsonify(rooms[pin])
+
+        # else if it is human player aiming to push his state to server
+        player_name: str = request.json['player_name'] # get player info from post request
+        player_state: dict = request.json['player_state']
 
         if pin in rooms: # if room exists
             if rooms[pin]['game']['state'] == 'in_game': # if in game
@@ -53,10 +82,10 @@ def update_player_state(pin=''):
         traceback.print_exc()
 
 
-def create_room(pin:str, initial_player_name:str, initial_player_state):
+def create_room(pin:str, initial_player_name:str):
     rooms[pin] = {
         'players': {
-            initial_player_name: initial_player_state,
+            initial_player_name: {},
         },
         'game': {
             'map': '',
@@ -67,6 +96,8 @@ def create_room(pin:str, initial_player_name:str, initial_player_state):
     }
 
 
+# updates room state and returns the updated room state
+# only room admin can update room state
 @app.route('/start/<path:pin>/', methods=['POST'])
 def start_game(pin=''):
     who_started: str = request.json['player_name']

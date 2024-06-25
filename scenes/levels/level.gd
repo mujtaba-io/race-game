@@ -36,7 +36,7 @@ func _process(delta):
 
 func on_new_player_added():
 	for player_name in global_script.room_state['players']:
-		if player_name in players:
+		if player_name not in players:
 			if player_name == global_script.our_player_name:
 				var human_player = human_player_scn.instantiate()
 				var vehicle = vehicle_scn.instantiate()
@@ -45,6 +45,8 @@ func on_new_player_added():
 				players[player_name] = human_player # to access vehicle, always get_parent() of player
 			else:
 				var network_player = network_player_scn.instantiate()
-				self.add_child(network_player)
+				var vehicle = vehicle_scn.instantiate()
+				vehicle.add_child(network_player)
+				self.add_child(vehicle)
 				players[player_name] = network_player
 
