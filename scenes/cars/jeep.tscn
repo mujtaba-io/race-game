@@ -188,7 +188,6 @@ mass = 70.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.01, 0)
 script = ExtResource("1_7vvpx")
-max_engine_force = 600.0
 
 [node name="Jeep_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0354595, -0.00452526)

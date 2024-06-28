@@ -44,6 +44,9 @@ def join_room(pin=''):
                     return jsonify({'error': 'Race is racing, so wait...'})
             else: # if not in game (means, if in lobby)
                 rooms[pin]['players'][player_name]= {} # join player to room
+                # assign spawn_point to player as the current length of players
+                rooms[pin]['players'][player_name]['spawn_point'] = len(rooms[pin]['players']) - 1
+                #   TODO: IF SOMEONE LEAVES, THEN SPAWN POINTS WILL BE MESSED UP
                 return jsonify(rooms[pin]) # send new room state to him
         else:
             create_room(pin, player_name)
@@ -72,6 +75,7 @@ def update_player_state(pin=''):
                     return jsonify(rooms[pin]) # send new room state to him
                 else: # if player is new arrival
                     return jsonify({'error': 'Race is racing, so wait...'})
+                    # REMOVE THIS CONSTRAINT. LET PEOPLE JOIN MID-RACE...
             else: # if not in game (means, if in lobby)
                 rooms[pin]['players'][player_name]= player_state # update player state
                 return jsonify(rooms[pin]) # send new room state to him
@@ -92,6 +96,7 @@ def create_room(pin:str, initial_player_name:str):
             'state': 'in_lobby',
             'admin': initial_player_name,
             'time_left': '',
+            'total_laps': 2,
         }
     }
 
@@ -104,10 +109,28 @@ def start_game(pin=''):
     print(who_started)
     if who_started == rooms[pin]['game']['admin']:
         rooms[pin]['game']['state'] = 'in_game'
-        print(rooms[pin]['game']['state'])
         return jsonify(rooms[pin])
     else:
         return jsonify({'error': 'Only admin can start the game'})
+
+
+
+
+"""
+# get global internet time to sync all clients to start rce at the same time
+import ntplib
+import time
+
+def get_ntp_time(server="pool.ntp.org"):
+  try:
+    client = ntplib.NTPClient()
+    response = client.request(server)
+  except ntplib.NTPException as e:
+    raise  # Re-raise the exception
+
+  # Convert NTP timestamp to seconds since epoch
+  return response.tx_time - time.timezone
+"""
 
 
 if __name__ == '__main__':

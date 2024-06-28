@@ -2,12 +2,9 @@ extends VehicleBody3D
 class_name Vehicle3D
 
 @export var vehicle_name: String = 'Car'
-@export var max_steering_angle: float = 0.5 # radians
+@export var max_steering_angle: float = 0.35 # radians
 @export var max_engine_force: float = 800 # max_engine_force
 @export var max_brake: float = 10 # max_engine_force
-
-var lap: int = 0#R
-var win_time: Time = null#R
 
 
 # should introduce levels/gearsa?
@@ -20,11 +17,10 @@ func reverse():
 
 
 func steer_right(delta):
-	steering = lerp(steering, -0.5, 25.0 * delta) # -0.5 
-
+	steering = lerp(steering, -max_steering_angle, 25.0 * delta)
 
 func steer_left(delta):
-	steering =  lerp(steering, 0.5, 25.0 * delta) # 0.5
+	steering = lerp(steering, max_steering_angle, 25.0 * delta)
 
 
 func apply_brake():

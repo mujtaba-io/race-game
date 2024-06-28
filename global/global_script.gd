@@ -24,6 +24,7 @@ var room_state: Dictionary = {
 		'admin_name': one f player names,
 		'state': 'in_lobby'/'in_game'/'loading_level'/'checking_winners',
 		'map': selected-level-map,
+		'race_start_time': 0.0,
 	},
 }
 """
@@ -34,7 +35,7 @@ var room_state : Dictionary = {
 		'map': '',
 		'state': '', # in_lobby/ready/in_game
 		'admin': '',
-		'time_left': '',
+		'total_laps': 3, #btw, will be overrided by server's state
 	},
 }
 
@@ -81,6 +82,13 @@ func trigger_start_game():
 		)
 
 
+
+#>
+#>
+#>
+
+
+
 #>
 #>
 #>
@@ -96,7 +104,6 @@ func fetch(endpoint: String, data: Dictionary):
 		return
 	
 	var uri := domain + endpoint + '/'
-	print(uri)
 	# Perform a GET request. The URL below returns JSON as of writing.
 	is_requesting = true
 	if data.is_empty():
@@ -114,10 +121,6 @@ func _http_request_completed(result, response_code, headers, body):
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-
-	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
-	print(response)
-	# TODO: WRITE RESPNSE TO state to be able to work on it
 	
 	if response != null:
 		# TODO: MUST NOT UPDATE STATE OF CURRENT HUMAN PLAYER
@@ -139,7 +142,6 @@ func fetch_unique(endpoint: String, data: Dictionary):
 	add_child(http_request_unique)
 	http_request_unique.request_completed.connect(self._unique_http_request_completed)
 	var uri := domain + endpoint + '/'
-	print(uri)
 	# Perform a GET request. The URL below returns JSON as of writing.
 	if data.is_empty():
 		var error = http_request_unique.request(uri, ['Content-Type: application/json'])
@@ -156,10 +158,6 @@ func _unique_http_request_completed(result, response_code, headers, body):
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-
-	# Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
-	print(response)
-	# TODO: WRITE RESPNSE TO state to be able to work on it
 	
 	if response != null:
 		room_state = response

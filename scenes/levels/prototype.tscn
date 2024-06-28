@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxjhfom1nygb2"]
+[gd_scene load_steps=18 format=3 uid="uid://bxjhfom1nygb2"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_xpxwy"]
 
@@ -16,7 +16,10 @@ albedo_color = Color(0.807843, 0.490196, 0.298039, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5uh7x"]
 material = SubResource("StandardMaterial3D_ld0ke")
-size = Vector3(128, 1, 128)
+size = Vector3(512, 1, 512)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xhflm"]
+points = PackedVector3Array(-256, -0.5, -256, -256, 0.5, -256, 256, -0.5, -256, -256, -0.5, 256, -256, 0.5, 256, 256, 0.5, -256, 256, -0.5, 256, 256, 0.5, 256)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0d1e0"]
 points = PackedVector3Array(-64, -0.5, -64, -64, 0.5, -64, 64, -0.5, -64, -64, -0.5, 64, -64, 0.5, 64, 64, 0.5, -64, 64, -0.5, 64, 64, 0.5, 64)
@@ -34,13 +37,21 @@ data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, 
 [sub_resource type="Curve3D" id="Curve3D_c2onb"]
 bake_interval = 76.76
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 15.4375, -0.0139456, -22.7104, 0, 0, 0, 0, 0, 0, -16.7898, 0, -33.4977, 0, 0, 0, 0, 0, 0, -43.2493, 0, -19.9804, 0, 0, 0, 0, 0, 0, -39.1174, -2.77551, 32.1416, 0, 0, 0, 0, 0, 0, 2.88804, 2.50415, 46.9003, 0, 0, 0, 0, 0, 0, 58.9876, 0, 53.6339, 0, 0, 0, 0, 0, 0, 65.0926, -2.30908, 22.6684, 0, 0, 0, 0, 0, 0, 59.3116, 0.00231934, -10.6771, 0, 0, 0, 0, 0, 0, 15.4217, 0, -22.7126),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.888, 0, 46.9, 0, 0, 0, 0, 0, 0, 58.9876, 0, 53.6339, 0, 0, 0, 0, 0, 0, 65.093, 0, 22.668, 0, 0, 0, 0, 0, 0, 59.312, 0, -10.677, 0, 0, 0, 0, 0, 0, 15.4217, 0, -22.7126, 0, 0, 0, 0, 0, 0, 15.438, 0, -22.71, 0, 0, 0, 0, 0, 0, -15.9369, 0, -81.3977, 0, 0, 0, 0, 0, 0, -77.4561, 0, -131.111, 0, 0, 0, 0, 0, 0, -140.687, 0, -89.8733, 0, 0, 0, 0, 0, 0, -177.113, 0, -5.33645, 0, 0, 0, 0, 0, 0, -150.309, 0, 100.506, 0, 0, 0, 0, 0, 0, -60.3741, 0, 184.313, 0, 0, 0, 0, 0, 0, -31.1151, 0, 157.599, 0, 0, 0, 0, 0, 0, -65.4626, 0, 128.34, 0, 0, 0, 0, 0, 0, -43.0915, 0, 95.0081, 0, 0, 0, 0, 0, 0, 2.888, 0, 46.9),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 9
+point_count = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4kqw"]
 albedo_color = Color(0.152941, 0, 0.219608, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iwfsq"]
+size = Vector3(20, 20, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_imkwp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v3rp5"]
+font_color = Color(1, 0.14902, 0, 1)
 
 [node name="prototype" type="Node3D"]
 script = ExtResource("1_xpxwy")
@@ -53,10 +64,15 @@ transform = Transform3D(1, 0, 0, 0, -0.641289, 0.7673, 0, -0.7673, -0.641289, 0,
 shadow_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.9491, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.93518, 0)
 mesh = SubResource("BoxMesh_5uh7x")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.93518, 0)
+shape = SubResource("ConvexPolygonShape3D_xhflm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.93518, 0)
@@ -80,10 +96,11 @@ mesh = SubResource("PrismMesh_lwa2o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_vyqv2")
 
-[node name="Path3D" type="Path3D" parent="."]
+[node name="track" type="Path3D" parent="."]
 curve = SubResource("Curve3D_c2onb")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="track"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.287, 0)
 material_override = SubResource("StandardMaterial3D_l4kqw")
 use_collision = true
 polygon = PackedVector2Array(0, 0, 0, 0.1, 16, 0.1, 16, 0)
@@ -97,3 +114,29 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 0.0
 path_joined = false
+
+[node name="lap_counter" type="Area3D" parent="track"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8965, 0, 83.586)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="track/lap_counter"]
+transform = Transform3D(0.717567, 0, -0.696489, 0, 1, 0, 0.696489, 0, 0.717567, 0, 0, 0)
+shape = SubResource("BoxShape3D_iwfsq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="track/lap_counter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12397, 0)
+mesh = SubResource("PlaneMesh_imkwp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "RACE STARTED JUST FUCKING GOOOO!!!!"
+label_settings = SubResource("LabelSettings_v3rp5")
+
+[connection signal="body_entered" from="track/lap_counter" to="." method="_on_lap_counter_body_entered"]
