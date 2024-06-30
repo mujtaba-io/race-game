@@ -12,7 +12,7 @@ rooms: dict = {} # all game rooms
 import traceback
 
 
-@app.route('/updateplayerdata/<path:pin>/', methods=['POST'])
+@app.route('/setplayerdata/<path:pin>/', methods=['POST'])
 def update_player_data(pin=''):
     try:
         # else if it is human player aiming to push his state to server
@@ -54,19 +54,16 @@ def start_game(pin=''):
 def join_room(pin=''):
     print("Attempting to join room")
     try:
-        room_data: dict = request.json['data']
-        player_name: str = list(room_data['players'].keys())[0]
+        player_name: str = request.json['name']
+        room_data: dict = request.json['room']
 
         print("Player name: ", player_name)
 
         if pin in rooms:
-            rooms[pin]['players'][player_name] = room_data['players'][player_name]
+            rooms[pin]['players'][player_name] = {}
             print("Player added to existing room.")
         else:
             rooms[pin] = room_data
-            rooms[pin]['admin'] = player_name # admin is who created the room
-            rooms[pin]['state'] = 'in_lobby'
-            rooms[pin]['pin'] = pin
     except:
         traceback.print_exc()
 

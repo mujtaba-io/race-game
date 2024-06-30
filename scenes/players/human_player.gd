@@ -5,7 +5,8 @@ func _physics_process(delta):
 	# follow vehicle
 	$origin.global_transform.origin = vehicle.global_transform.origin
 	
-	update_data_dict()
+	update_data_dict() # Update local data dict
+	Room.set_player_data(data) # Send it to room to relay it to server
 	
 	# reset accelreation, brake, steering
 	vehicle.reset_vehicle_controls(delta)
@@ -37,9 +38,9 @@ func _input(event):
 
 
 func update_data_dict():
+	data['vehicle'] = vehicle.name
 	data['position'] = var_to_str(vehicle.position)
 	data['rotation'] = var_to_str(vehicle.rotation)
 	data['lap'] = lap
-	data['time_elapsed'] = timer
-	data['vehicle_name'] = vehicle.name
-	data['finished'] = lap >= Room.laps # if lap is 3 or more, player is finished
+	data['timer'] = timer
+	data['finished'] = lap >= Room.data['laps'] # if lap is 3 or more, player is finished

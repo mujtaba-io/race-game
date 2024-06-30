@@ -1,7 +1,6 @@
 extends Panel
 
 var lobby_players_list: ItemList
-var this_player = Room.get_human_player() # whoever is the human player here
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,21 +9,21 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	for player in Room.players:
+	for player_name in Room.data['players']:
 		var player_found = false
 		
 		for i in lobby_players_list.get_item_count():
-			if lobby_players_list.get_item_text(i) == player.name:
+			if lobby_players_list.get_item_text(i) == player_name:
 				player_found = true
 		if not player_found:
-			lobby_players_list.add_item(player.name)
+			lobby_players_list.add_item(player_name)
 	
-	if Room.admin ==  this_player.name:
+	if Room.data['admin'] ==  Room.human_player_name:
 		$start_game_button.visible = true
 	else:
 		$start_game_button.visible = false
 	
-	if Room.state == 'in_game':
+	if Room.data['state'] == 'in_game':
 		get_tree().change_scene_to_file("res://scenes/levels/level.tscn")
 
 

@@ -8,16 +8,6 @@ func _ready():
 	http_request.request_completed.connect(self._http_request_completed)
 
 
-
-func _process(delta):
-	if Room.state != '':
-		var req_data = {
-			'name': Room.get_human_player().name,
-			'data': Room.get_human_player().get_data_dict(),
-		}
-		fetch('/updateplayerdata/' + Room.pin, req_data)
-
-
 #>
 #>
 #>

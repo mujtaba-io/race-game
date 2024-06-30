@@ -2,6 +2,11 @@ extends Node3D
 class_name Level
 
 
+var human_player = preload("res://scenes/players/human_player.tscn")
+var network_player = preload("res://scenes/players/network_player.tscn")
+
+var jeep = preload("res://scenes/vehicles/jeep.tscn")
+
 @export var track: Path3D # all levels will have a track node named 'track'
 @export var checkpoint: Area3D # lap counter/checkpoint
 
@@ -15,10 +20,24 @@ func _ready():
 
 
 func spawn_players():
-	for player in Room.players:
-		if not (player in self.get_children()):
-			add_child(player)
-			player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-2, 2), 2, randf_range(-2, 2))
+	var children_names: Array[String] = []
+	for child in self.get_children():
+		children_names.append(child.name)
+	
+	for player_name in Room.data['players']:
+		if not (player_name in children_names): # ! BUG: 	its children's name; not children itself
+			if player_name == Room.human_player_name:
+				var player := human_player.instantiate()
+				player.name = player_name
+				player.set_vehicle(jeep.instantiate())
+				add_child(player)
+				player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-2, 2), 2, randf_range(-2, 2))
+			else:
+				var player := network_player.instantiate()
+				player.name = player_name
+				player.set_vehicle(jeep.instantiate())
+				add_child(player)
+				player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-2, 2), 2, randf_range(-2, 2))
 
 
 func _on_checkpoint_body_entered(body):

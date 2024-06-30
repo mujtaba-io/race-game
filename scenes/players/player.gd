@@ -58,14 +58,18 @@ func trigger_next_lap(track_length: float):
 
 # player's data
 var data: Dictionary = {
-	'vehicle_name': '',
+	'vehicle': '', # Name/ScenePath of vehicle
 	'position': var_to_str(Vector3.ZERO),
 	'rotation': var_to_str(Vector3.ZERO),
 	
 	'lap': 0,
-	'time_elapsed': 0.0, # time elapsed since race_start_time (see global room state)
+	'timer': 0.0, # time elapsed since start of race
 	"finished": false, # is finished racing
 }
 
 func get_data_dict():
 	return data
+
+
+func set_data_dict(new_data: Dictionary):
+	data = new_data
