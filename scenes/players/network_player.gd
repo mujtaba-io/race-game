@@ -3,7 +3,7 @@ class_name NetworkPlayer
 
 
 func _process(delta):
-	Room.get_player_data(self.name)
+	data = Room.get_player_data(self.name) # MUST ASSIGN NEW DATA TO data
 	update_variables()
 
 

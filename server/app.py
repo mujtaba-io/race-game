@@ -11,6 +11,13 @@ rooms: dict = {} # all game rooms
 # API
 import traceback
 
+@app.route('/room/<path:pin>/', methods=['GET'])
+def room_data(pin=''):
+    if pin in rooms:
+        return jsonify(rooms[pin])
+    else:
+        return jsonify({'error': 'Room not found.'})
+
 
 @app.route('/setplayerdata/<path:pin>/', methods=['POST'])
 def update_player_data(pin=''):

@@ -68,3 +68,16 @@ func start_game():
 	Backyard.fetch_unique('/startgame/'+pin, req_data)
 
 
+# In some cases, when data needs to be fetched without POST dota
+func update_data():
+	Backyard.fetch("/room/"+pin, {})
+
+#> #>
+
+var tmp = 1
+var tmp_ = 0
+func _process(delta):
+	if tmp_ < 0:
+		tmp_ = tmp
+		print(data)
+	tmp_ -= delta

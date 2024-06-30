@@ -18,6 +18,8 @@ func _ready():
 	# Spawn all players from room
 	spawn_players()
 
+func _process(delta):
+	spawn_players() # in-game spawn
 
 func spawn_players():
 	var children_names: Array[String] = []
@@ -25,7 +27,7 @@ func spawn_players():
 		children_names.append(child.name)
 	
 	for player_name in Room.data['players']:
-		if not (player_name in children_names): # ! BUG: 	its children's name; not children itself
+		if not (player_name in children_names):
 			if player_name == Room.human_player_name:
 				var player := human_player.instantiate()
 				player.name = player_name

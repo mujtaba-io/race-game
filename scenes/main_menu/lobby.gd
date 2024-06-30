@@ -9,6 +9,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	Room.update_data() # Update room data so new players wiull be updated to all other players
+	
 	for player_name in Room.data['players']:
 		var player_found = false
 		
