@@ -1,10 +1,15 @@
 extends VehicleBody3D
 class_name Vehicle3D
 
-@export var vehicle_name: String = 'Car'
+
+@export var vehicle_name: String = 'Vehicle'
 @export var max_steering_angle: float = 0.35 # radians
 @export var max_engine_force: float = 800 # max_engine_force
 @export var max_brake: float = 10 # max_engine_force
+
+
+func _ready():
+	self.add_to_group("vehicles")
 
 
 # should introduce levels/gearsa?

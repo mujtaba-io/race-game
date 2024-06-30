@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://bxjhfom1nygb2"]
+[gd_scene load_steps=17 format=3 uid="uid://bxjhfom1nygb2"]
 
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_xpxwy"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_s71pk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_703oi"]
 
@@ -50,11 +50,10 @@ size = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_imkwp"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_v3rp5"]
-font_color = Color(1, 0.14902, 0, 1)
-
-[node name="prototype" type="Node3D"]
-script = ExtResource("1_xpxwy")
+[node name="level" type="Node3D" node_paths=PackedStringArray("track", "checkpoint")]
+script = ExtResource("1_s71pk")
+track = NodePath("track")
+checkpoint = NodePath("track/checkpoint")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6316")
@@ -115,28 +114,13 @@ path_continuous_u = true
 path_u_distance = 0.0
 path_joined = false
 
-[node name="lap_counter" type="Area3D" parent="track"]
+[node name="checkpoint" type="Area3D" parent="track"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8965, 0, 83.586)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="track/lap_counter"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="track/checkpoint"]
 transform = Transform3D(0.717567, 0, -0.696489, 0, 1, 0, 0.696489, 0, 0.717567, 0, 0, 0)
 shape = SubResource("BoxShape3D_iwfsq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="track/lap_counter"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="track/checkpoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12397, 0)
 mesh = SubResource("PlaneMesh_imkwp")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "RACE STARTED JUST FUCKING GOOOO!!!!"
-label_settings = SubResource("LabelSettings_v3rp5")
-
-[connection signal="body_entered" from="track/lap_counter" to="." method="_on_lap_counter_body_entered"]

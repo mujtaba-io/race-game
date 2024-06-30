@@ -1,0 +1,9 @@
+
+room has room state.
+
+each human player sets its new state to room.
+
+when human player updates its data, just sne dit directly to server which retyrns response of new room state.
+
+network players must get their variable datas from the str_to_var() version of players in room.
+

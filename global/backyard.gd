@@ -1,65 +1,5 @@
 extends Node
 
-# globals
-var our_player_name: String
-var room_pin: String
-
-"""
-STRUCTURE OF STATE DICT:
-var room_state: Dictionary = {
-	'players': {
-		'e4gve_uid': {
-			'name': x,
-			'position': x,
-			.. more car variables
-		},
-		'5gfggd_uid': {
-			'name': y,
-			'position': y,
-			.. more car variables
-		},
-		... more players
-	},
-	'game': {
-		'admin_name': one f player names,
-		'state': 'in_lobby'/'in_game'/'loading_level'/'checking_winners',
-		'map': selected-level-map,
-		'race_start_time': 0.0,
-	},
-}
-"""
-
-var room_state : Dictionary = {
-	'players': {},
-	'game': {
-		'map': '',
-		'state': '', # in_lobby/ready/in_game
-		'admin': '',
-		'total_laps': 3, #btw, will be overrided by server's state
-	},
-}
-
-
-func push_player_state(player_name: String, new_state: Dictionary):
-	# update locally (unnecessary as it will be overrided by server changes)
-	# + we dont giv fuk to our state here, it is to send to server only
-	room_state['players'][player_name] = new_state
-	# then update server with new state
-	fetch('/room/'+room_pin, {
-		'player_name': player_name,
-		'player_state': new_state,
-	})
-	
-
-func pull_player_state(player_name: String):
-	# fetch player state from server
-	# NETWORK PLAYER MUST NEVER UPDATE ITS STATE TO SERVER
-	fetch('/room/'+room_pin, {})# MAKE GET REQUEST
-	# for now, send old state, but when response will arrive,
-	# next requests will return refreshed data
-	return room_state['players'][player_name]
-
-
 
 func _ready():
 	# Create an HTTP request node and connect its completion signal.
@@ -68,25 +8,14 @@ func _ready():
 	http_request.request_completed.connect(self._http_request_completed)
 
 
-func join_room():
-	# api:- name:state for player to be put in rooms:players
-	fetch_unique('/join/' + room_pin, {
-		'player_name': our_player_name,
-	})
 
-
-func trigger_start_game():
-	fetch_unique(
-		"/start/"+room_pin,
-		{"player_name": our_player_name} # who gave the command (must be admin)
-		)
-
-
-
-#>
-#>
-#>
-
+func _process(delta):
+	if Room.state != '':
+		var req_data = {
+			'name': Room.get_human_player().name,
+			'data': Room.get_human_player().get_data_dict(),
+		}
+		fetch('/updateplayerdata/' + Room.pin, req_data)
 
 
 #>
@@ -124,7 +53,7 @@ func _http_request_completed(result, response_code, headers, body):
 	
 	if response != null:
 		# TODO: MUST NOT UPDATE STATE OF CURRENT HUMAN PLAYER
-		room_state = response
+		Room.data = response
 	
 	is_requesting = false
 
@@ -160,5 +89,4 @@ func _unique_http_request_completed(result, response_code, headers, body):
 	var response = json.get_data()
 	
 	if response != null:
-		room_state = response
-
+		Room.data = response

@@ -1,0 +1,16 @@
+1. network players are not being instanced in other players scenes
+not in lobby, not in level..
+
+it means that somehow this data is not going from data['players'] to other parts of game
+
+
+
+ISNT IT BETTER TO DIERCTLY SEND/RCV ROOM.PLAYERS TO / FRO SERVER
+THIS WILL SAVE HEADACHE OF data[''] things/???
+
+
+and will make code sooooooooooooo simple.....
+
+
+
+AND DESIGN SERVER TO JUSR RELAY AND SYNC IT SOMEHOW....

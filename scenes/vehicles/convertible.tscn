@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dqx76jrcgrpc6"]
 
-[ext_resource type="Script" path="res://scenes/cars/vehicle3d.gd" id="1_eu8ah"]
+[ext_resource type="Script" path="res://scenes/vehicles/vehicle3d.gd" id="1_eu8ah"]
 [ext_resource type="Texture2D" uid="uid://cowlrblt88u3q" path="res://_extern/cars/Convertible/Convertible_BaseColor.png" id="2_wethp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmi8m"]

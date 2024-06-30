@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://c38uoqn52qqje"]
 
-[ext_resource type="Script" path="res://scenes/cars/vehicle3d.gd" id="1_7vvpx"]
-[ext_resource type="Texture2D" uid="uid://nvuyki0wmfr7" path="res://_extern/cars/Jeep/1385 Jeep.png" id="4_tfivr"]
+[ext_resource type="Script" path="res://scenes/vehicles/vehicle3d.gd" id="1_hqk46"]
+[ext_resource type="Texture2D" uid="uid://nvuyki0wmfr7" path="res://_extern/cars/Jeep/1385 Jeep.png" id="2_j6kkk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7ut8"]
 resource_name = "Mat"
 cull_mode = 2
-albedo_texture = ExtResource("4_tfivr")
+albedo_texture = ExtResource("2_j6kkk")
 metallic = 0.5
 roughness = 0.0960784
 
@@ -187,7 +187,7 @@ shadow_mesh = SubResource("ArrayMesh_frhix")
 mass = 70.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.01, 0)
-script = ExtResource("1_7vvpx")
+script = ExtResource("1_hqk46")
 
 [node name="Jeep_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0354595, -0.00452526)

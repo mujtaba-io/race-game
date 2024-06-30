@@ -1,9 +1,11 @@
 extends Player
+class_name HumanPlayer
 
 func _physics_process(delta):
-	
-	# update camera position
+	# follow vehicle
 	$origin.global_transform.origin = vehicle.global_transform.origin
+	
+	update_data_dict()
 	
 	# reset accelreation, brake, steering
 	vehicle.reset_vehicle_controls(delta)
@@ -22,10 +24,7 @@ func _physics_process(delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# send new player state to global room state
-	update_player_state() # updated model locally
-	global_script.push_player_state(player_name, player_state) #push to global state
+
 
 
 func _input(event):
@@ -34,3 +33,13 @@ func _input(event):
 		$origin.rotate_y(deg_to_rad(-mouse_delta.x * 0.2))
 		$origin/pivot.rotate_x(deg_to_rad(mouse_delta.y * 0.2))
 
+
+
+
+func update_data_dict():
+	data['position'] = var_to_str(vehicle.position)
+	data['rotation'] = var_to_str(vehicle.rotation)
+	data['lap'] = lap
+	data['time_elapsed'] = timer
+	data['vehicle_name'] = vehicle.name
+	data['finished'] = lap >= Room.laps # if lap is 3 or more, player is finished
