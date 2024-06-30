@@ -28,12 +28,9 @@ func spawn_players():
 	
 	for player_name in Room.data['players']:
 		if not (player_name in children_names):
-			if player_name == Room.human_player_name:
-				var player := human_player.instantiate()
-				player.name = player_name
-				player.set_vehicle(jeep.instantiate())
-				add_child(player)
-				player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-2, 2), 2, randf_range(-2, 2))
+			if player_name == Room.human_player.name:
+				add_child(Room.human_player)
+				Room.human_player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-2, 2), 2, randf_range(-2, 2))
 			else:
 				var player := network_player.instantiate()
 				player.name = player_name

@@ -25,12 +25,12 @@ var data: Dictionary = {
 }
 
 var pin: String
-var human_player_name: String = ''
+var human_player: HumanPlayer
 
 # CALLED BY HUMAN PLAYER - WILL REQUEST TO SERVER, WHIHC IN TURN WILL UPDATE ENTIRE Room.data DICT
 func set_player_data(human_player_data: Dictionary):
 	var req_data := {
-		'name': human_player_name,
+		'name': human_player.name,
 		'data': human_player_data,
 	}
 	Backyard.fetch("/setplayerdata/"+pin, req_data)
@@ -46,24 +46,25 @@ func get_player_data(network_player_name: String) -> Dictionary:
 
 
 
-func join_room(_pin:String, _name:String):
+func join_room(_pin:String, _human_player: HumanPlayer):
 	pin = _pin
-	human_player_name = _name
+	human_player = _human_player
 	
-	data['admin'] = human_player_name
+	data['admin'] = human_player.name
 	data['state'] = 'in_lobby'
-	data['players'][human_player_name] = {}
+	data['players'][human_player.name] = {}
 	
 	var req_data = {
-		'name': human_player_name,
-		'room': data
+		'name': human_player.name,
+		'player_data': human_player.data,
+		'room_data': data
 		} # Send room data to server
 	Backyard.fetch_unique('/joinroom/'+pin, req_data)
 
 
 func start_game():
 	var req_data = {
-		'name': human_player_name,
+		'name': human_player.name,
 	}
 	Backyard.fetch_unique('/startgame/'+pin, req_data)
 

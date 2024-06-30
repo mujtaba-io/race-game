@@ -62,15 +62,16 @@ def join_room(pin=''):
     print("Attempting to join room")
     try:
         player_name: str = request.json['name']
-        room_data: dict = request.json['room']
+        player_data: dict = request.json['player_data']
+        room_data: dict = request.json['room_data']
 
         print("Player name: ", player_name)
 
         if pin in rooms:
-            rooms[pin]['players'][player_name] = {}
+            rooms[pin]['players'][player_name] = player_data
             print("Player added to existing room.")
         else:
-            rooms[pin] = room_data
+            rooms[pin] = room_data # SHOULD WE ADD PLAYER DATA OR IS IT ALREADY SENT WITH THE ROOM DATA ITSELF?
     except:
         traceback.print_exc()
 

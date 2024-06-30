@@ -21,7 +21,7 @@ func _process(delta):
 		if not player_found:
 			lobby_players_list.add_item(player_name)
 	
-	if Room.data['admin'] ==  Room.human_player_name:
+	if Room.data['admin'] ==  Room.human_player.name:
 		$start_game_button.visible = true
 	else:
 		$start_game_button.visible = false

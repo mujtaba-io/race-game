@@ -15,6 +15,10 @@ func _on_button_pressed():
 	
 	# vAttempt to join room pin with player - if success, room status will turn to in-lobby
 	# Else nothing will happen
-	Room.join_room(pin, player_name)
+	var _human_player = human_player.instantiate()
+	_human_player.name = player_name
+	_human_player.set_vehicle(jeep.instantiate())
+	
+	Room.join_room(pin, _human_player)
 	
 	
