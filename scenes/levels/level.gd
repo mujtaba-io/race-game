@@ -34,7 +34,9 @@ func spawn_players():
 			else:
 				var player := network_player.instantiate()
 				player.name = player_name
-				player.set_vehicle(jeep.instantiate())
+				player.set_vehicle(
+					load(Room.data['players'][player_name]['vehicle']).instantiate()
+					)
 				add_child(player)
 				player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-2, 2), 2, randf_range(-2, 2))
 

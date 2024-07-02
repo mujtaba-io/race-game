@@ -32,7 +32,12 @@ custom_minimum_size = Vector2(64, 116)
 layout_mode = 2
 max_text_lines = 3
 
-[node name="start_game_button" type="Button" parent="."]
+[node name="admin_controls" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="start_game_button" type="Button" parent="admin_controls"]
 layout_mode = 0
 offset_left = 65.0
 offset_top = 181.0
@@ -41,4 +46,45 @@ offset_bottom = 212.0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 text = "Start Game"
 
-[connection signal="pressed" from="start_game_button" to="." method="_on_start_game_button_pressed"]
+[node name="laps" type="LineEdit" parent="admin_controls"]
+layout_mode = 0
+offset_left = 12.915
+offset_top = 147.0
+offset_right = 79.9775
+offset_bottom = 178.0
+text = "3"
+placeholder_text = "laps"
+
+[node name="select_levels" type="Label" parent="admin_controls"]
+layout_mode = 0
+offset_left = 256.915
+offset_top = 158.0
+offset_right = 350.915
+offset_bottom = 181.0
+text = "Select levels"
+
+[node name="levels" type="ItemList" parent="admin_controls"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 180.0
+offset_right = 357.0
+offset_bottom = 302.0
+
+[node name="select_vehicles" type="Label" parent="admin_controls"]
+layout_mode = 0
+offset_left = 250.915
+offset_top = 8.0
+offset_right = 344.915
+offset_bottom = 31.0
+text = "Select vehicles"
+
+[node name="vehicles" type="ItemList" parent="admin_controls"]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 29.0
+offset_right = 356.0
+offset_bottom = 150.0
+
+[connection signal="pressed" from="admin_controls/start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="item_selected" from="admin_controls/levels" to="." method="_on_levels_item_selected"]
+[connection signal="item_selected" from="admin_controls/vehicles" to="." method="_on_vehicles_item_selected"]

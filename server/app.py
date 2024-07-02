@@ -78,5 +78,19 @@ def join_room(pin=''):
     return jsonify(rooms[pin])
 
 
+@app.route('/changelevel/<path:pin>/', methods=['POST'])
+def change_level(pin=''):
+    try:
+        new_level: dict = request.json['level']
+
+        if pin in rooms:
+            rooms[pin]['level'] = new_level
+        else:
+            return jsonify({'error': 'Room not found.'})
+    except:
+        traceback.print_exc()
+
+    return jsonify(rooms[pin])
+
 if __name__ == '__main__':
     app.run(debug=True, port=7860)

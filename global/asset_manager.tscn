@@ -1,0 +1,12 @@
+[gd_scene load_steps=6 format=3 uid="uid://sq0ep8u4l48a"]
+
+[ext_resource type="Script" path="res://global/asset_manager.gd" id="1_b8wxm"]
+[ext_resource type="PackedScene" uid="uid://bxjhfom1nygb2" path="res://scenes/levels/desert.tscn" id="2_bbff8"]
+[ext_resource type="PackedScene" uid="uid://dqx76jrcgrpc6" path="res://scenes/vehicles/convertible.tscn" id="3_d1p5e"]
+[ext_resource type="PackedScene" uid="uid://kqq31i2xiebl" path="res://scenes/levels/grass.tscn" id="3_wy0qo"]
+[ext_resource type="PackedScene" uid="uid://c38uoqn52qqje" path="res://scenes/vehicles/jeep.tscn" id="4_lnh8g"]
+
+[node name="AssetManager" type="Node"]
+script = ExtResource("1_b8wxm")
+_levels = Array[Resource]([ExtResource("2_bbff8"), ExtResource("3_wy0qo")])
+_vehicles = Array[Resource]([ExtResource("4_lnh8g"), ExtResource("3_d1p5e")])

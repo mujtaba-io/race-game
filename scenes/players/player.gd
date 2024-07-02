@@ -13,8 +13,12 @@ var distance_traveled: float = 0.0
 var finished: bool = false
 
 func set_vehicle(_vehicle: Vehicle3D):
+	if vehicle: # if it already attached
+		remove_child(vehicle) # Remove it else 2 vehicles will be there in level
 	self.vehicle = _vehicle
 	self.add_child(_vehicle)
+	
+	data['vehicle'] = _vehicle.name # ! CHEAP-BUG SOLUTION?: To solve the null-assign-to-name wwhen not added to tree but state is shared.
 
 
 func get_vehicle():

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Backyard="*res://global/backyard.gd"
 Room="*res://global/room.gd"
+AssetManager="*res://global/asset_manager.tscn"
 
 [input]
 

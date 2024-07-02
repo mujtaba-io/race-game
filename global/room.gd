@@ -70,8 +70,15 @@ func start_game():
 
 
 # In some cases, when data needs to be fetched without POST dota
-func update_data():
+func update_data(updated_data: Dictionary = {}):
 	Backyard.fetch("/room/"+pin, {})
+
+
+
+func set_level(resource_path: String):
+	data['level'] = resource_path
+	Backyard.fetch_unique("/changelevel/"+pin, {'level': data['level']})
+
 
 #> #>
 
@@ -80,5 +87,6 @@ var tmp_ = 0
 func _process(delta):
 	if tmp_ < 0:
 		tmp_ = tmp
-		print(data)
+		for player in data['players']:
+			print("vehicle of player " + player +" is :"+str(data['players'][player]))
 	tmp_ -= delta
