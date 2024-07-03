@@ -50,10 +50,11 @@ size = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_imkwp"]
 
-[node name="level" type="Node3D" node_paths=PackedStringArray("track", "checkpoint")]
+[node name="level" type="Node3D" node_paths=PackedStringArray("track", "checkpoint", "track_initial_direction")]
 script = ExtResource("1_s71pk")
 track = NodePath("track")
 checkpoint = NodePath("track/checkpoint")
+track_initial_direction = NodePath("track/track_direction")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6316")
@@ -124,3 +125,7 @@ shape = SubResource("BoxShape3D_iwfsq")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="track/checkpoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12397, 0)
 mesh = SubResource("PlaneMesh_imkwp")
+
+[node name="track_direction" type="Marker3D" parent="track"]
+transform = Transform3D(0.694658, 0, -0.71934, 0, 1, 0, 0.71934, 0, 0.694658, -21.3269, -1.77409, 83.0227)
+gizmo_extents = 10.0

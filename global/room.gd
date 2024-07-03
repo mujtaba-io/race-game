@@ -52,6 +52,7 @@ func join_room(_pin:String, _human_player: HumanPlayer):
 	
 	data['admin'] = human_player.name
 	data['state'] = 'in_lobby'
+	data['laps'] = 3 # default 3 laps
 	data['players'][human_player.name] = {}
 	
 	var req_data = {
@@ -70,7 +71,7 @@ func start_game():
 
 
 # In some cases, when data needs to be fetched without POST dota
-func update_data(updated_data: Dictionary = {}):
+func update_data():
 	Backyard.fetch("/room/"+pin, {})
 
 
@@ -82,11 +83,12 @@ func set_level(resource_path: String):
 
 #> #>
 
+# DEBUG AREA
 var tmp = 1
 var tmp_ = 0
 func _process(delta):
 	if tmp_ < 0:
 		tmp_ = tmp
-		for player in data['players']:
-			print("vehicle of player " + player +" is :"+str(data['players'][player]))
+		print("FUCKING ROOOOOM DATA: " + str(data))
+		print("\n\n")
 	tmp_ -= delta

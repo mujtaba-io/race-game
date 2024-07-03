@@ -54,6 +54,7 @@ offset_right = 79.9775
 offset_bottom = 178.0
 text = "3"
 placeholder_text = "laps"
+editable = false
 
 [node name="select_levels" type="Label" parent="admin_controls"]
 layout_mode = 0

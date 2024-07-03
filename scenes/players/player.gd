@@ -33,6 +33,7 @@ func _ready():
 
 func _process(delta):
 	update_distance_traveled()
+	update_timer(delta)
 
 
 var _last_player_position: Vector3 = Vector3.ZERO #tmp
@@ -45,6 +46,11 @@ func update_distance_traveled():
 
 func get_distance_traveled():
 	return distance_traveled
+
+
+func update_timer(delta: float):
+	if not bool(data["finished"]):
+		timer += delta
 
 
 # HANDLE WIN SITUATION IF LAP > MAX LAPS
@@ -62,7 +68,7 @@ func trigger_next_lap(track_length: float):
 
 # player's data
 var data: Dictionary = {
-	'vehicle': '', # Name/ScenePath of vehicle
+	'vehicle': '', # AssetManager name of asset
 	'position': var_to_str(Vector3.ZERO),
 	'rotation': var_to_str(Vector3.ZERO),
 	

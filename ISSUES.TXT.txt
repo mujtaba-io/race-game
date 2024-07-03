@@ -33,3 +33,14 @@ JUST LIKE ADDING PLAYER OR STARTING GAME EVENTS PUSH DATA TO SERVER.
 
 
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+3. LAPS ARE DEFAULT 3 AND NEVER CHANGE TO MORE NUMBERS -- 
+FOR THIS, CREATE A SEPARATE ENDPOINT "/updatelaps/[pin]" when laps are seleceted...
+
+for leave it for now as 3 laps are enugh
+
+for now, disabling laps changing..
