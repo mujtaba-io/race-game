@@ -3,6 +3,11 @@ class_name NetworkPlayer
 
 
 func _process(delta):
+	# REMOVE PLAYER IF NOT IN FRESH DATA FROM SERVER (they left the game and now server has removed them)
+	if self.name not in Room.data['players']:
+		self.queue_free()
+		return
+	
 	data = Room.get_player_data(self.name) # MUST ASSIGN NEW DATA TO data
 	update_variables()
 

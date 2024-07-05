@@ -45,8 +45,13 @@ func spawn_players():
 				print('\n')
 				var player := network_player.instantiate()
 				player.name = player_name
+				print("lalal lala ...")########
+				print(Room.data['players'][player_name]['vehicle']) ####
+				print(player) ###########
 				player.set_vehicle(
-					load(Room.data['players'][player_name]['vehicle']).instantiate()
+					load(
+						AssetManager.vehicles[Room.data['players'][player_name]['vehicle']]
+					).instantiate()
 					)
 				add_child(player)
 				player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-4, 4), 2, randf_range(-4, 4))

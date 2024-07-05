@@ -70,11 +70,6 @@ func start_game():
 	Backyard.fetch_unique('/startgame/'+pin, req_data)
 
 
-# In some cases, when data needs to be fetched without POST dota
-func update_data():
-	Backyard.fetch("/room/"+pin, {})
-
-
 
 func set_level(resource_path: String):
 	data['level'] = resource_path

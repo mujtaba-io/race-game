@@ -38,7 +38,7 @@ func _input(event):
 
 
 func update_data_dict():
-	data['vehicle'] = vehicle.name
+	data['vehicle'] = vehicle.name # SHOULD BE SCN PATH OR NAME?
 	data['position'] = var_to_str(vehicle.position)
 	data['rotation'] = var_to_str(vehicle.rotation)
 	data['lap'] = lap

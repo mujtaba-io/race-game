@@ -15,20 +15,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'myfuckingsecurekeyhehe'  # Change this to a secure secret key
 
 
-@app.route('/room/<path:pin>/', methods=['GET'])
-def room_data(pin=''):
-    print("room_data") ############################################
-    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
-    if pin in rooms:
-        return jsonify(rooms[pin])
-    else:
-        return jsonify({'error': 'Room not found.'})
-
-
 @app.route('/setplayerdata/<path:pin>/', methods=['POST'])
 def update_player_data(pin=''):
     print("update_player_data") ############################################
-    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     try:
         # else if it is human player aiming to push his state to server
         player_name: str = request.json['name'] # get player info from post request
@@ -37,10 +26,12 @@ def update_player_data(pin=''):
         if pin in rooms: # if room exists
             rooms[pin]['players'][player_name] = player_data
         else:
+            reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
             return jsonify({'error': 'Room not found.'})
     except:
         traceback.print_exc()
 
+    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     return jsonify(rooms[pin])
 
 
@@ -56,10 +47,12 @@ def start_game(pin=''):
                 rooms[pin]['state'] = 'in_game'
                 print("C")
         else:
+            reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
             return jsonify({'error': 'Room not found.'})
     except:
         traceback.print_exc()
 
+    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     return jsonify(rooms[pin])
 
 
@@ -86,6 +79,7 @@ def join_room(pin=''):
     except:
         traceback.print_exc()
 
+    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     return jsonify(rooms[pin])
 
 
@@ -138,12 +132,12 @@ def reset_room(pin: str):
                 del rooms[pin]['players'][player]
                 print("Player removed.")
 
-        if len(rooms[pin]['players']) == 0:
-            del rooms[pin]
-            print("Room deleted.")
-        elif rooms[pin]['admin'] == '':
-            rooms[pin]['admin'] = list(rooms[pin]['players'].keys())[0]
-            print("Admin changed.")
+        ##if len(rooms[pin]['players']) == 0: !! NOT DELETE ROOM, IT GETS ME IN TROUBLE..
+        ##    del rooms[pin] # BECAUSE FRONTEND Room.data gets overridd with {}
+        ##    print("Room deleted.") # SO NEW JOINEE GETS IN TROUBLE
+            if rooms[pin]['admin'] == '': # it was actually elif if above code is uncommented
+                rooms[pin]['admin'] = list(rooms[pin]['players'].keys())[0]
+                print("Admin changed.")
 
 
 
