@@ -49,15 +49,17 @@ func get_distance_traveled():
 
 
 func update_timer(delta: float):
-	if not bool(data["finished"]):
+	if not finished:
 		timer += delta
 
 
 # HANDLE WIN SITUATION IF LAP > MAX LAPS
 func trigger_next_lap(track_length: float):
-	if (get_distance_traveled() / (lap + 1)) >= 0.75 * track_length:
+	if finished: return
+	if (get_distance_traveled() / (lap + 1)) >= 0.9 * track_length:
 		lap += 1
-		print("lap: "+str(lap))
+		if lap >= Room.data['laps']:
+			finished = true
 
 
 
@@ -75,6 +77,8 @@ var data: Dictionary = {
 	'lap': 0,
 	'timer': 0.0, # time elapsed since start of race
 	"finished": false, # is finished racing
+	
+	'timestamp': Time.get_unix_time_from_system(), # TIMESTAMP THAT SERVER USES TO CHECK IF PLAYER IS AALIVE OR LEFT THE GAME
 }
 
 func get_data_dict():

@@ -43,4 +43,6 @@ func update_data_dict():
 	data['rotation'] = var_to_str(vehicle.rotation)
 	data['lap'] = lap
 	data['timer'] = timer
-	data['finished'] = lap >= Room.data['laps'] # if lap is 3 or more, player is finished
+	data['finished'] = finished
+	
+	data['timestamp'] = Time.get_unix_time_from_system() # Update timestamp so server knows we are alive

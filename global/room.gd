@@ -81,6 +81,13 @@ func set_level(resource_path: String):
 	Backyard.fetch_unique("/changelevel/"+pin, {'level': data['level']})
 
 
+
+func reset():
+	Backyard.fetch_unique('/leaveroom/'+pin, { 'name': human_player.name })
+	human_player.queue_free()
+	pin = ''
+
+
 #> #>
 
 # DEBUG AREA
@@ -89,6 +96,6 @@ var tmp_ = 0
 func _process(delta):
 	if tmp_ < 0:
 		tmp_ = tmp
-		print("FUCKING ROOOOOM DATA: " + str(data))
+		print("FUCKING ROOOOOM DATA: " + str(data)) # DEBUG
 		print("\n\n")
 	tmp_ -= delta

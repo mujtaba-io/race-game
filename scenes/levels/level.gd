@@ -5,6 +5,8 @@ class_name Level
 var human_player = preload("res://scenes/players/human_player.tscn")
 var network_player = preload("res://scenes/players/network_player.tscn")
 
+var in_level_ui = preload("res://scenes/levels/in_level_ui/in_level_ui.tscn")
+
 var jeep = preload("res://scenes/vehicles/jeep.tscn")
 
 @export var track: Path3D # all levels will have a track node named 'track'
@@ -19,6 +21,9 @@ func _ready():
 	
 	# Spawn all players from room
 	spawn_players()
+
+	# in-level UI
+	add_ui()
 
 func _process(delta):
 	spawn_players() # in-game spawn
@@ -35,6 +40,9 @@ func spawn_players():
 				Room.human_player.vehicle.global_position = checkpoint.global_position + Vector3(randf_range(-4, 4), 2, randf_range(-4, 4))
 				Room.human_player.vehicle.rotation.y = track_initial_direction.rotation.y
 			else:
+				print("FUCKING ROOM DATA DURING INSAT::")
+				print(Room.data)
+				print('\n')
 				var player := network_player.instantiate()
 				player.name = player_name
 				player.set_vehicle(
@@ -53,3 +61,9 @@ func _on_checkpoint_body_entered(body):
 
 func get_track_length():
 	return track.curve.get_baked_length()
+
+
+# Add in-level UI scene to show who won etc and back to main menu things.
+func add_ui():
+	var in_level_ui_instance = in_level_ui.instantiate()
+	add_child(in_level_ui_instance)
