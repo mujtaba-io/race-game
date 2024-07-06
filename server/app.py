@@ -26,12 +26,10 @@ def update_player_data(pin=''):
         if pin in rooms: # if room exists
             rooms[pin]['players'][player_name] = player_data
         else:
-            reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
             return jsonify({'error': 'Room not found.'})
     except:
         traceback.print_exc()
 
-    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     return jsonify(rooms[pin])
 
 
@@ -47,12 +45,10 @@ def start_game(pin=''):
                 rooms[pin]['state'] = 'in_game'
                 print("C")
         else:
-            reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
             return jsonify({'error': 'Room not found.'})
     except:
         traceback.print_exc()
 
-    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     return jsonify(rooms[pin])
 
 
@@ -79,7 +75,6 @@ def join_room(pin=''):
     except:
         traceback.print_exc()
 
-    reset_all_rooms() # TMP, IT ADDS FULL OVERHEAD PER REQUIEST #######
     return jsonify(rooms[pin])
 
 
@@ -106,6 +101,9 @@ def leave_room(pin=''):
             if player_name in rooms[pin]['players']:
                 del rooms[pin]['players'][player_name]
                 print("Player left the room.")
+                if rooms[pin]['players'] == {}: # REMOVE PIN IF ALL PLAYERS LEAVE
+                    del rooms[pin]
+                    print("Room deleted.")
             else:
                 return jsonify({'error': 'Player not found in the room.'})
         else:
@@ -121,16 +119,20 @@ def all_data():
 
 
 
-def reset_room(pin: str):
+# Clients will call this function peroiodically after some time
+@app.route('/resetroom/<path:pin>/', methods=['GET'])
+def reset_room(pin: str=''):
     if pin in rooms:
         # Iterate over a list of player keys to avoid runtime error
         for player in list(rooms[pin]['players'].keys()):
             # If player's 'timestamp' is 12 seconds older than current time, remove player
             if time.time() - rooms[pin]['players'][player]['timestamp'] > 12:
+                print(player, " removed.")
                 if player == rooms[pin]['admin']:
                     rooms[pin]['admin'] = ''
                 del rooms[pin]['players'][player]
                 print("Player removed.")
+                continue
 
         ##if len(rooms[pin]['players']) == 0: !! NOT DELETE ROOM, IT GETS ME IN TROUBLE..
         ##    del rooms[pin] # BECAUSE FRONTEND Room.data gets overridd with {}
@@ -138,13 +140,11 @@ def reset_room(pin: str):
             if rooms[pin]['admin'] == '': # it was actually elif if above code is uncommented
                 rooms[pin]['admin'] = list(rooms[pin]['players'].keys())[0]
                 print("Admin changed.")
+    return jsonify(rooms[pin]) #UNTESTED LINE
 
 
 
 
-def reset_all_rooms():
-    for pin in rooms:
-        reset_room(pin)
 
 
 

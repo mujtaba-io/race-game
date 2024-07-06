@@ -85,12 +85,12 @@ func reset():
 
 #> #>
 
-# DEBUG AREA
-var tmp = 1
-var tmp_ = 0
+# Every client will be calling it according to their own 6 elapsed seconds,
+# so in reality, updates will be more frequent with more clients connected
+const SERVER_ROOM_RESET_TIME = 6 # TRIGER SERVER RESET AFTER 3 SECONDS
+var server_reset_tmp_time = 0
 func _process(delta):
-	if tmp_ < 0:
-		tmp_ = tmp
-		print("FUCKING ROOOOOM DATA: " + str(data)) # DEBUG
-		print("\n\n")
-	tmp_ -= delta
+	if server_reset_tmp_time < 0:
+		server_reset_tmp_time = SERVER_ROOM_RESET_TIME
+		Backyard.fetch_unique('/resetroom/'+pin, {})
+	server_reset_tmp_time -= delta
