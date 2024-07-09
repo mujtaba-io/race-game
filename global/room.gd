@@ -94,3 +94,9 @@ func _process(delta):
 		server_reset_tmp_time = SERVER_ROOM_RESET_TIME
 		Backyard.fetch_unique('/resetroom/'+pin, {})
 	server_reset_tmp_time -= delta
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		reset() # leave room on quit
+		get_tree().quit() # default behavior
