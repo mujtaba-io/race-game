@@ -5,9 +5,6 @@ func _physics_process(delta):
 	# follow vehicle
 	$origin.global_transform.origin = vehicle.global_transform.origin
 	
-	update_data_dict() # Update local data dict
-	Room.set_player_data(data) # Send it to room to relay it to server
-	
 	# reset accelreation, brake, steering
 	vehicle.reset_vehicle_controls(delta)
 	
@@ -34,15 +31,3 @@ func _input(event):
 		$origin.rotate_y(deg_to_rad(-mouse_delta.x * 0.2))
 		$origin/pivot.rotate_x(deg_to_rad(mouse_delta.y * 0.2))
 
-
-
-
-func update_data_dict():
-	data['vehicle'] = vehicle.name # SHOULD BE SCN PATH OR NAME?
-	data['position'] = var_to_str(vehicle.position)
-	data['rotation'] = var_to_str(vehicle.rotation)
-	data['lap'] = lap
-	data['timer'] = timer
-	data['finished'] = finished
-	
-	data['timestamp'] = Time.get_unix_time_from_system() # Update timestamp so server knows we are alive

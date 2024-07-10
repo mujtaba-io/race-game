@@ -11,15 +11,14 @@ config_version=5
 [application]
 
 config/name="race-game"
-run/main_scene="res://scenes/main_menu/main_menu.tscn"
+run/main_scene="res://MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Backyard="*res://global/backyard.gd"
-Room="*res://global/room.gd"
-AssetManager="*res://global/asset_manager.tscn"
+AssetManager="*res://Globals/AssetManager.tscn"
+SceneManager="*res://Globals/SceneManager.tscn"
 
 [input]
 

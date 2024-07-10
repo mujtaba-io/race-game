@@ -6,19 +6,24 @@ class_name Player
 
 var lap: int = 0
 var timer: float = 0.0
-
+var finished: bool = false
 var distance_traveled: float = 0.0
+
 @export var vehicle: Vehicle3D
 
-var finished: bool = false
+
+
+func with_data(_vehicle: Vehicle3D) -> Player:
+	set_vehicle(_vehicle)
+	return self # IMPORTANT
+
+
 
 func set_vehicle(_vehicle: Vehicle3D):
 	if vehicle: # if it already attached
 		remove_child(vehicle) # Remove it else 2 vehicles will be there in level
 	self.vehicle = _vehicle
 	self.add_child(_vehicle)
-	
-	data['vehicle'] = _vehicle.name # ! CHEAP-BUG SOLUTION?: To solve the null-assign-to-name wwhen not added to tree but state is shared.
 
 
 func get_vehicle():
@@ -53,37 +58,5 @@ func update_timer(delta: float):
 		timer += delta
 
 
-# HANDLE WIN SITUATION IF LAP > MAX LAPS
-func trigger_next_lap(track_length: float):
-	if finished: return
-	if (get_distance_traveled() / (lap + 1)) >= 0.9 * track_length:
-		lap += 1
-		if lap >= Room.data['laps']:
-			finished = true
-
-
-
-
-#>
-#>
-
-
-# player's data
-var data: Dictionary = {
-	'vehicle': '', # AssetManager name of asset
-	'position': var_to_str(Vector3.ZERO),
-	'rotation': var_to_str(Vector3.ZERO),
-	
-	'lap': 0,
-	'timer': 0.0, # time elapsed since start of race
-	"finished": false, # is finished racing
-	
-	'timestamp': Time.get_unix_time_from_system(), # TIMESTAMP THAT SERVER USES TO CHECK IF PLAYER IS AALIVE OR LEFT THE GAME
-}
-
-func get_data_dict():
-	return data
-
-
-func set_data_dict(new_data: Dictionary):
-	data = new_data
+func next_lap():
+	lap += 1

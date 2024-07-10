@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3h5727kojw8m"]
+[gd_scene load_steps=2 format=3 uid="uid://c4afhre202m6w"]
 
-[ext_resource type="Script" path="res://scenes/players/human_player.gd" id="1_tlpin"]
+[ext_resource type="Script" path="res://Players/HumanPlayer.gd" id="1_e3e1m"]
 
-[node name="human_player" type="Node"]
-script = ExtResource("1_tlpin")
+[node name="HumanPlayer" type="Node"]
+script = ExtResource("1_e3e1m")
 
 [node name="origin" type="Node3D" parent="."]
 

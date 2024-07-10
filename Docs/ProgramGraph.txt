@@ -1,0 +1,14 @@
+
+start.
+
+start:
+	goto MainMenu
+
+MainMenu:
+	ready levels, vehicles information
+	display that information
+	let user select level AND vehicle
+	let user enter laps
+	let user press 'RACE' {
+		on-press: goto level
+	}

@@ -1,3 +1,0 @@
-vehicle.gd creates a 'vehicle' node, used to construct ANY 3D vehicle.
-
-this vehicle will be used by player to race in the game

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcgspe6k3be27"]
+
+[ext_resource type="Script" path="res://Globals/SceneManager.gd" id="1_ramvc"]
+
+[node name="SceneManager" type="Node"]
+script = ExtResource("1_ramvc")

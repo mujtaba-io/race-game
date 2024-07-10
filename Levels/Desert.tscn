@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://kqq31i2xiebl"]
+[gd_scene load_steps=17 format=3 uid="uid://5qn5giqfmi5y"]
 
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_82gsd"]
+[ext_resource type="Script" path="res://Levels/Level.gd" id="1_tajqo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_703oi"]
 
@@ -11,11 +11,11 @@ sky_material = SubResource("ProceduralSkyMaterial_703oi")
 background_mode = 2
 sky = SubResource("Sky_mcyyx")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_didmb"]
-albedo_color = Color(0.384314, 0.423529, 0.176471, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld0ke"]
+albedo_color = Color(0.807843, 0.490196, 0.298039, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5uh7x"]
-material = SubResource("StandardMaterial3D_didmb")
+material = SubResource("StandardMaterial3D_ld0ke")
 size = Vector3(512, 1, 512)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xhflm"]
@@ -50,8 +50,8 @@ size = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_imkwp"]
 
-[node name="level" type="Node3D" node_paths=PackedStringArray("track", "checkpoint", "track_initial_direction")]
-script = ExtResource("1_82gsd")
+[node name="Desert" type="Node3D" node_paths=PackedStringArray("track", "checkpoint", "track_initial_direction")]
+script = ExtResource("1_tajqo")
 track = NodePath("track")
 checkpoint = NodePath("track/checkpoint")
 track_initial_direction = NodePath("track/track_direction")

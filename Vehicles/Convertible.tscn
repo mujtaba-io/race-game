@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqx76jrcgrpc6"]
+[gd_scene load_steps=15 format=3 uid="uid://csahn0q5h4agw"]
 
-[ext_resource type="Script" path="res://scenes/vehicles/vehicle3d.gd" id="1_eu8ah"]
-[ext_resource type="Texture2D" uid="uid://cowlrblt88u3q" path="res://_extern/cars/Convertible/Convertible_BaseColor.png" id="2_wethp"]
+[ext_resource type="Script" path="res://Vehicles/Vehicle3D.gd" id="1_mk1o2"]
+[ext_resource type="Texture2D" uid="uid://cowlrblt88u3q" path="res://_extern/cars/Convertible/Convertible_BaseColor.png" id="2_fytkx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmi8m"]
 resource_name = "Convertible_material"
 cull_mode = 2
-albedo_texture = ExtResource("2_wethp")
+albedo_texture = ExtResource("2_fytkx")
 metallic = 0.5
 roughness = 0.0960784
 
@@ -183,11 +183,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tjvxa")
 
-[node name="convertible" type="VehicleBody3D"]
+[node name="Convertible" type="VehicleBody3D"]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.01, 0)
-script = ExtResource("1_eu8ah")
-max_engine_force = 500.0
+script = ExtResource("1_mk1o2")
 
 [node name="convertible_mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_hhujg")

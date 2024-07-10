@@ -3,7 +3,7 @@ class_name Vehicle3D
 
 
 @export var vehicle_name: String = 'Vehicle'
-@export var max_steering_angle: float = 0.35 # radians
+@export var max_steering_angle: float = 0.5 # radians
 @export var max_engine_force: float = 800 # max_engine_force
 @export var max_brake: float = 10 # max_engine_force
 

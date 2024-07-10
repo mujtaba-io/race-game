@@ -1,0 +1,17 @@
+
+CODE CONVENTION:
+	
+	1. Starting from underscore (_) is private thing.
+	2. ClassNames, SceneNames, ScriptNames, FolderNames follow PascalCase
+	3. All variables, objects use snake_case
+
+STRUCTURE:
+	1. AssetManager must register all Levels & Vehicles to appear in menus.
+	2. Global is AutoLoad Singleton that carries all transition variables.
+
+
+NOTES:
+	
+	Level expects all players to be sent, laps to be told, ... etc all data
+	to be sent beforehand. It must only add_child() them at appropriate
+	locations.
