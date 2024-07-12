@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpv2fs6oinw2v"]
+
+[ext_resource type="Script" path="res://Players/UI/PlayerUI.gd" id="1_ega4w"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ega4w")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 75.0
+offset_right = 851.0
+offset_bottom = 583.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 60.0
+offset_right = 480.0
+offset_bottom = 445.0
+
+[node name="BackToMainMenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 529.0
+offset_right = 506.0
+offset_bottom = 560.0
+text = "Back to main menu"
+
+[connection signal="pressed" from="BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]

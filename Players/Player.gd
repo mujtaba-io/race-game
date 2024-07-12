@@ -12,7 +12,7 @@ var distance_traveled: float = 0.0
 @export var vehicle: Vehicle3D
 
 
-
+# Constructor
 func with_data(_vehicle: Vehicle3D) -> Player:
 	set_vehicle(_vehicle)
 	return self # IMPORTANT
@@ -36,9 +36,13 @@ func _ready():
 
 
 
-func _process(delta):
+func _physics_process(delta):
 	update_distance_traveled()
 	update_timer(delta)
+
+
+func _process(delta):
+	pass
 
 
 var _last_player_position: Vector3 = Vector3.ZERO #tmp
@@ -59,4 +63,6 @@ func update_timer(delta: float):
 
 
 func next_lap():
-	lap += 1
+	if not finished:
+		lap += 1
+		print("debug: lap " + str(lap))

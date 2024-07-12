@@ -6,8 +6,16 @@ CODE CONVENTION:
 	3. All variables, objects use snake_case
 
 STRUCTURE:
+	
+	0. All dependencies are top-to-bottom. Lower nodes only provide methods
+	that are called by upper methods. There are no two-sided dependencides.
+	Lower modules are totally independent of upper modules.
+	For example:
+		Level has Players have Vehicle
+		Players also have UI
+		Level has UI
+	
 	1. AssetManager must register all Levels & Vehicles to appear in menus.
-	2. Global is AutoLoad Singleton that carries all transition variables.
 
 
 NOTES:
@@ -15,3 +23,4 @@ NOTES:
 	Level expects all players to be sent, laps to be told, ... etc all data
 	to be sent beforehand. It must only add_child() them at appropriate
 	locations.
+
