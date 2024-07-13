@@ -11,7 +11,6 @@ var _is_forwarding: bool = false
 func _ready():
 	super() # Call base class's _ready()
 	player_ui = SceneManager.load_scene("res://Players/UI/PlayerUI.tscn")
-	player_ui.visible = false # initially invisible
 	add_child(player_ui)
 	
 	$origin.global_transform.origin = vehicle.global_transform.origin
@@ -71,6 +70,14 @@ func _process(delta):
 	super(delta)
 	player_ui.display_all_players()
 	if finished or Input.is_action_pressed("ui_home"):
-		player_ui.visible = true
+		player_ui.stats.visible = true
 	else:
-		player_ui.visible = false
+		player_ui.stats.visible = false
+	
+	$origin.rotation.y = lerp_angle($origin.rotation.y, vehicle.rotation.y, delta * 5)
+	
+	# Mobile steering
+	if player_ui.get_steering_angle() not in range(-0.01, 0.01):
+		vehicle.steer(player_ui.get_steering_angle()) # Also steer based on drag if on mobile
+	if player_ui.is_accelerator_pressed():
+		vehicle.acclerate(vehicle.max_engine_force)

@@ -1,27 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpv2fs6oinw2v"]
+[gd_scene load_steps=4 format=3 uid="uid://cpv2fs6oinw2v"]
 
 [ext_resource type="Script" path="res://Players/UI/PlayerUI.gd" id="1_ega4w"]
+[ext_resource type="Texture2D" uid="uid://3mcu0su28587" path="res://_extern/textures/steering.png" id="2_1q8gd"]
+[ext_resource type="Texture2D" uid="uid://dfjpnu6g1a5ca" path="res://_extern/textures/accelerator.png" id="3_g06fr"]
 
 [node name="PlayerUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ega4w")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Controls" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Steering" type="Sprite2D" parent="Controls"]
+position = Vector2(998, 496)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_1q8gd")
+
+[node name="Accelerator" type="Sprite2D" parent="Controls"]
+position = Vector2(105, 513)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_g06fr")
+
+[node name="Stats" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Stats"]
 layout_mode = 0
 offset_left = 286.0
 offset_top = 75.0
 offset_right = 851.0
 offset_bottom = 583.0
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Label" type="Label" parent="Stats/Panel"]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 60.0
 offset_right = 480.0
 offset_bottom = 445.0
 
-[node name="BackToMainMenuButton" type="Button" parent="."]
+[node name="BackToMainMenuButton" type="Button" parent="Stats"]
 layout_mode = 0
 offset_left = 348.0
 offset_top = 529.0
@@ -29,4 +51,4 @@ offset_right = 506.0
 offset_bottom = 560.0
 text = "Back to main menu"
 
-[connection signal="pressed" from="BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]
+[connection signal="pressed" from="Stats/BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]

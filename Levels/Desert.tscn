@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_tajqo"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_703oi"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_plyc0"]
 
 [sub_resource type="Sky" id="Sky_mcyyx"]
-sky_material = SubResource("ProceduralSkyMaterial_703oi")
+sky_material = SubResource("ProceduralSkyMaterial_plyc0")
 
 [sub_resource type="Environment" id="Environment_c6316"]
 background_mode = 2
 sky = SubResource("Sky_mcyyx")
+tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld0ke"]
 albedo_color = Color(0.807843, 0.490196, 0.298039, 1)
