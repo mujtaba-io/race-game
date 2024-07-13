@@ -12,24 +12,17 @@ func _ready():
 	self.add_to_group("vehicles")
 
 
-# should introduce levels/gearsa?
-func acclerate():
-	engine_force = max_engine_force
+
+func acclerate(amount: float):
+	engine_force = amount
 
 
-func reverse():
-	engine_force = -max_engine_force
+func steer(angle: float):
+	steering = angle
 
 
-func steer_right(delta):
-	steering = lerp(steering, -max_steering_angle, 25.0 * delta)
-
-func steer_left(delta):
-	steering = lerp(steering, max_steering_angle, 25.0 * delta)
-
-
-func apply_brake():
-	brake = max_brake
+func apply_brake(amount: float):
+	brake = amount
 
 
 # >

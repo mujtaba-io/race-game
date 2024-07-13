@@ -10,7 +10,7 @@ var _players: Array[Player]
 var _number_laps: int
 
 
-const MAX_RACE_COUNTDOWN := 5 # How many seconds after which race begins
+const MAX_RACE_COUNTDOWN := 1 # How many seconds after which race begins
 var race_countdown: float = MAX_RACE_COUNTDOWN
 var is_race_started: bool = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://5qn5giqfmi5y"]
+[gd_scene load_steps=19 format=3 uid="uid://5qn5giqfmi5y"]
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_tajqo"]
 
@@ -35,9 +35,9 @@ data = PackedVector3Array(0, 1, 0, 0, 1, 0, 0, 0.9924, -0.0868, 0, 1, 0, -0.0085
 data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="Curve3D" id="Curve3D_c2onb"]
-bake_interval = 76.76
+bake_interval = 100.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.888, 0, 46.9, 0, 0, 0, 0, 0, 0, 58.9876, 0, 53.6339, 0, 0, 0, 0, 0, 0, 65.093, 0, 22.668, 0, 0, 0, 0, 0, 0, 59.312, 0, -10.677, 0, 0, 0, 0, 0, 0, 15.4217, 0, -22.7126, 0, 0, 0, 0, 0, 0, 15.438, 0, -22.71, 0, 0, 0, 0, 0, 0, -15.9369, 0, -81.3977, 0, 0, 0, 0, 0, 0, -77.4561, 0, -131.111, 0, 0, 0, 0, 0, 0, -140.687, 0, -89.8733, 0, 0, 0, 0, 0, 0, -177.113, 0, -5.33645, 0, 0, 0, 0, 0, 0, -150.309, 0, 100.506, 0, 0, 0, 0, 0, 0, -60.3741, 0, 184.313, 0, 0, 0, 0, 0, 0, -31.1151, 0, 157.599, 0, 0, 0, 0, 0, 0, -65.4626, 0, 128.34, 0, 0, 0, 0, 0, 0, -43.0915, 0, 95.0081, 0, 0, 0, 0, 0, 0, 2.888, 0, 46.9),
+"points": PackedVector3Array(36.1178, 0, -1.12526, 0, 0, 0, 2.888, 0, 46.9, 0, 0, 0, -38.0191, 0, -1.9413, 58.9876, 0, 53.6339, 0, 0, 0, 0, 0, 0, 65.093, 0, 22.668, 0, 0, 0, 0, 0, 0, 59.312, 0, -10.677, 0, 0, 0, 0, 0, 0, 15.4217, 0, -22.7126, 0, 0, 0, 0, 0, 0, 15.438, 0, -22.71, 0, 0, 0, 0, 0, 0, -15.9369, 0, -81.3977, 0, 0, 0, 0, 0, 0, -77.4561, 0, -131.111, 0, 0, 0, 0, 0, 0, -140.687, 0, -89.8733, 0, 0, 0, 0, 0, 0, -177.113, 0, -5.33645, 0, 0, 0, 0, 0, 0, -150.309, 0, 100.506, 0, 0, 0, 0, 0, 0, -60.3741, 0, 184.313, 0, 0, 0, 0, 0, 0, -31.1151, 0, 157.599, 0, 0, 0, 0, 0, 0, -65.4626, 0, 128.34, 0, 0, 0, 0, 0, 0, -43.0915, 0, 95.0081, 0, 0, 0, 0, 0, 0, 2.888, 0, 46.9),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 16
@@ -49,6 +49,12 @@ albedo_color = Color(0.152941, 0, 0.219608, 1)
 size = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_imkwp"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_yd3rl"]
+size = Vector3(3.925, 1.295, 6.13)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n44lg"]
+data = PackedVector3Array(0, 0.6475, 3.065, 1.9625, -0.6475, 3.065, -1.9625, -0.6475, 3.065, 0, 0.6475, -3.065, -1.9625, -0.6475, -3.065, 1.9625, -0.6475, -3.065, 0, 0.6475, 3.065, 0, 0.6475, -3.065, 1.9625, -0.6475, 3.065, 0, 0.6475, -3.065, 1.9625, -0.6475, -3.065, 1.9625, -0.6475, 3.065, 0, 0.6475, -3.065, 0, 0.6475, 3.065, -1.9625, -0.6475, -3.065, 0, 0.6475, 3.065, -1.9625, -0.6475, 3.065, -1.9625, -0.6475, -3.065, -1.9625, -0.6475, 3.065, 1.9625, -0.6475, 3.065, -1.9625, -0.6475, -3.065, 1.9625, -0.6475, 3.065, 1.9625, -0.6475, -3.065, -1.9625, -0.6475, -3.065)
 
 [node name="Desert" type="Node3D" node_paths=PackedStringArray("track", "checkpoint")]
 script = ExtResource("1_tajqo")
@@ -99,20 +105,20 @@ shape = SubResource("ConcavePolygonShape3D_vyqv2")
 curve = SubResource("Curve3D_c2onb")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="track"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.287, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.425, 0)
 material_override = SubResource("StandardMaterial3D_l4kqw")
 use_collision = true
-polygon = PackedVector2Array(0, 0, 0, 0.1, 16, 0.1, 16, 0)
+polygon = PackedVector2Array(-16, 0, -16, 0.1, 16, 0.1, 16, 0)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
 path_interval = 1.0
-path_simplify_angle = 0.1
+path_simplify_angle = 1.0
 path_rotation = 1
 path_local = false
 path_continuous_u = true
 path_u_distance = 0.0
-path_joined = false
+path_joined = true
 
 [node name="checkpoint" type="Area3D" parent="track"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8965, 0, 83.586)
@@ -152,3 +158,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6701, 0, 26.9572)
 
 [node name="Marker3D8" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4523, 0, 31.7316)
+
+[node name="test" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.80945, 0)
+mesh = SubResource("PrismMesh_yd3rl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="test"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n44lg")

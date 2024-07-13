@@ -3,6 +3,10 @@ class_name HumanPlayer
 
 var player_ui: Node
 
+var _is_moving_fast: bool = false
+var _is_reversing: bool = false
+var _is_forwarding: bool = false
+
 
 func _ready():
 	super() # Call base class's _ready()
@@ -24,14 +28,26 @@ func _physics_process(delta):
 	# reset accelreation, brake, steering
 	vehicle.reset_vehicle_controls(delta)
 	
+	if vehicle.get_linear_velocity().length() > 0.3:
+		_is_moving_fast = true
+	else:
+		_is_moving_fast = false
+	
 	if Input.is_action_pressed("forward"):
-		vehicle.acclerate()
+		vehicle.acclerate(vehicle.max_engine_force)
+	
 	if Input.is_action_pressed("back"):
-		vehicle.reverse()
+		vehicle.acclerate(-vehicle.max_engine_force)
+	
 	if Input.is_action_pressed("right"):
-		vehicle.steer_right(delta)
+		vehicle.steer(
+			lerp(vehicle.steering, -vehicle.max_steering_angle, 25.0 * delta / (1+(vehicle.get_linear_velocity().length() / 50)))
+			)
+	
 	if Input.is_action_pressed("left"):
-		vehicle.steer_left(delta)
+		vehicle.steer(
+			lerp(vehicle.steering, vehicle.max_steering_angle, 25.0 * delta / (1+(vehicle.get_linear_velocity().length() / 50)))
+		)
 
 
 

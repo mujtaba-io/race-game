@@ -184,10 +184,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_frhix")
 
 [node name="Jeep" type="VehicleBody3D"]
-mass = 70.0
+mass = 2200.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.01, 0)
+linear_damp = 0.07
 script = ExtResource("1_3e70s")
+vehicle_name = "Jeep"
+max_engine_force = 16000.0
 
 [node name="Jeep_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0354595, -0.00452526)
@@ -204,6 +207,7 @@ use_as_steering = true
 wheel_radius = 0.45
 suspension_travel = 0.3
 suspension_stiffness = 40.0
+suspension_max_force = 16000.0
 damping_compression = 1.0
 damping_relaxation = 1.2
 
@@ -217,6 +221,7 @@ use_as_steering = true
 wheel_radius = 0.45
 suspension_travel = 0.3
 suspension_stiffness = 40.0
+suspension_max_force = 16000.0
 damping_compression = 1.0
 damping_relaxation = 1.2
 
@@ -230,6 +235,7 @@ use_as_traction = true
 wheel_radius = 0.45
 suspension_travel = 0.3
 suspension_stiffness = 40.0
+suspension_max_force = 16000.0
 damping_compression = 1.0
 damping_relaxation = 1.2
 
@@ -243,6 +249,7 @@ use_as_traction = true
 wheel_radius = 0.45
 suspension_travel = 0.3
 suspension_stiffness = 40.0
+suspension_max_force = 16000.0
 damping_compression = 1.0
 damping_relaxation = 1.2
 
